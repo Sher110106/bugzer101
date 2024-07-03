@@ -1,5 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import puppeteer from 'puppeteer';
 import mongoose from 'mongoose';
 import cors from "cors";
 
@@ -15,6 +16,7 @@ mongoose.connect('mongodb+srv://admin:tesbiq-xEskuf-7dygco@cluster0.a6eeksn.mong
 const reportSchema = new mongoose.Schema({
     actions: Array,
     errors: Array,
+    screenshot: String,
     timestamp: { type: Date, default: Date.now }
 }, { suppressReservedKeysWarning: true });
 
@@ -25,10 +27,22 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.post('/report', async (req, res) => {
+    let screenshot;
+    try {
+        const browser = await puppeteer.launch();
+        const page = await browser.newPage();
+        await page.goto('http://localhost:5173'); // Adjust the URL to your frontend
+        screenshot = await page.screenshot({ encoding: 'base64' });
+        await browser.close();
+    } catch (err) {
+        console.error('Error capturing screenshot:', err);
+        screenshot = 'screenshot-error'; // Fallback value
+    }
     const { actions, errors } = req.body
     const newReport = new Report({
         actions,
-        errors
+        errors,
+        screenshot
     });
     try {
         await newReport.save();
