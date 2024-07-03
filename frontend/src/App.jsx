@@ -40,9 +40,8 @@ function App() {
                     errors: errorLogs,
                     screenshot
                 };
-                //http://localhost:5173
-                //https://api-omega-navy-60.vercel.app/report
-                fetch('//https://api-omega-navy-60.vercel.app/report', {
+
+                fetch('http://localhost:5173', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
