@@ -1,0 +1,77 @@
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+body {
+    @apply bg-gray-100 text-gray-900;
+}
+
+a {
+    @apply text-blue-500 hover:text-blue-700;
+}
+
+button {
+    @apply bg-blue-500 text-white font-bold py-2 px-4 rounded;
+}
+
+button:hover {
+    @apply bg-blue-700;
+}
+
+#socials a {
+    @apply transition-transform transform hover:scale-110;
+}
+
+#hero {
+    @apply text-center;
+}
+
+#hero p {
+    @apply text-gray-700;
+}
+
+#about, #features, #how-it-works, #contact {
+    @apply mt-20;
+}
+
+#about h1, #features h1, #how-it-works h1, #contact h1 {
+    @apply text-3xl font-bold;
+}
+
+#about p, #features ul, #how-it-works ol, #contact p {
+    @apply text-gray-700;
+}
+
+#features ul {
+    @apply list-disc ml-5;
+}
+
+#how-it-works ol {
+    @apply list-decimal ml-5;
+}
+
+.video-container {
+    @apply flex justify-center;
+}
+
+.video-container video {
+    @apply w-full max-w-3xl;
+}
+
+#contact {
+    @apply text-center;
+}
+
+#contact p {
+    @apply text-xl;
+}
+
+footer {
+    @apply mt-10 text-center text-gray-600;
+}
+#report{
+    @apply bg-red-500 text-white font-bold py-2 px-4 rounded;
+}
