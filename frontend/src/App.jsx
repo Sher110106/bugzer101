@@ -41,7 +41,7 @@ function App() {
                     screenshot
                 };
 
-                fetch('http://localhost:5173', {
+                fetch('https://api-sher110106s-projects.vercel.app/report', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'

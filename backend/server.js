@@ -31,7 +31,7 @@ app.post('/report', async (req, res) => {
     try {
         const browser = await puppeteer.launch();
         const page = await browser.newPage();
-        await page.goto('http://localhost:5173'); // Adjust the URL to your frontend
+        await page.goto('https://bugzer.vercel.app/'); // Adjust the URL to your frontend
         screenshot = await page.screenshot({ encoding: 'base64' });
         await browser.close();
     } catch (err) {
