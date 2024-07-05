@@ -39,7 +39,6 @@ app.post('/report', async (req, res) => {
     try {
         console.log('Launching Puppeteer...');
         const browser = await puppeteer.launch({
-            executablePath: '/opt/homebrew/bin/chromium',
             args: ['--no-sandbox', '--disable-setuid-sandbox'],
             ignoreDefaultArgs: ['--disable-extensions'],
             headless: false,
