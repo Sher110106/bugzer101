@@ -6,7 +6,8 @@
     "mongoose": "^8.4.4",
     "node": "^20.15.0",
     "puppeteer": "^22.12.1",
-    "puppeteer-core": "^22.12.1"
+    "puppeteer-core": "^22.12.1",
+    "puppeteer-debug": "^2.1.1"
   },
   "name": "backend",
   "version": "1.0.0",

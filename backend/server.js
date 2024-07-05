@@ -3,7 +3,8 @@ import bodyParser from 'body-parser';
 import puppeteer from 'puppeteer';
 import mongoose from 'mongoose';
 import cors from 'cors';
-
+import debug from 'puppeteer-debug';
+debug({ verbose: true });
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI)
     .then(() => {
