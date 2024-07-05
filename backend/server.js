@@ -39,8 +39,9 @@ app.post('/report', async (req, res) => {
     try {
         console.log('Launching Puppeteer...');
         const browser = await puppeteer.launch({
-            executablePath: '/Users/sher/Library/CloudStorage/OneDrive-PlakshaUniversity/untitled3/backend/.cache/puppeteer/chrome',
-            args: ['--no-sandbox', '--disable-setuid-sandbox']
+            executablePath: '/Users/sher/Library/CloudStorage/OneDrive-PlakshaUniversity/untitled3/backend/.cache/puppeteer/chrome-headless-shell/mac_arm-126.0.6478.126/chrome-headless-shell',
+            args: ['--no-sandbox', '--disable-setuid-sandbox'],
+            headless: true
         });
         const page = await browser.newPage();
 
