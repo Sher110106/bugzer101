@@ -3,8 +3,7 @@ import bodyParser from 'body-parser';
 import puppeteer from 'puppeteer';
 import mongoose from 'mongoose';
 import cors from 'cors';
-import debug from 'puppeteer-debug';
-debug({ verbose: true });
+
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI)
     .then(() => {
@@ -40,9 +39,9 @@ app.post('/report', async (req, res) => {
     try {
         console.log('Launching Puppeteer...');
         const browser = await puppeteer.launch({
-            executablePath: '/Users/sher/Library/CloudStorage/OneDrive-PlakshaUniversity/untitled3/backend/.cache/puppeteer/chrome-headless-shell/mac_arm-126.0.6478.126/chrome-headless-shell-mac-arm64/chrome-headless-shell',
+            executablePath: '/Users/sher/Library/CloudStorage/OneDrive-PlakshaUniversity/untitled3/backend/.cache/puppeteer/chrome/mac_arm-126.0.6478.126/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing',
             args: ['--no-sandbox'],
-            headless: true
+            headless: false
         });
         const page = await browser.newPage();
 
