@@ -40,9 +40,7 @@ app.post('/report', async (req, res) => {
         console.log('Launching Puppeteer...');
         const browser = await puppeteer.launch({
             executablePath: '/Users/sher/.cache/puppeteer/chrome/mac_arm-126.0.6478.126/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing',
-            args: ['--no-sandbox', '--disable-setuid-sandbox'],
-            ignoreDefaultArgs: ['--disable-extensions'],
-            headless: false,
+            args: ['--no-sandbox', '--disable-setuid-sandbox']
         });
         const page = await browser.newPage();
 

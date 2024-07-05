@@ -13,7 +13,6 @@
     }
   ],
   "env": {
-    "PUPPETEER_CACHE_DIR": "./backend/cachePuppet",
     "MONGODB_URI": "mongodb+srv://admin:yourpassword@cluster0.abeeksn.mongodb.net/?retryWrites=true&w=majority&appName=yourAppName"
   },
   "installCommand": "npx puppeteer browsers install chrome"
