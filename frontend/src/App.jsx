@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Button, IconButton } from "@material-tailwind/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLinkedin, faXTwitter, faTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons';
+import { faLinkedin, faXTwitter, faTwitter, faInstagram} from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
 import './index.css';
@@ -33,29 +33,68 @@ function App() {
                 });
             };
 
+            // const sendReport = async () => {
+            //     const screenshot = await captureScreenshot();
+            //     const reportData = {
+            //         actions: userActions,
+            //         errors: errorLogs,
+            //         screenshot
+            //     };
+            //     //http://localhost:5173
+            //     //https://api-omega-navy-60.vercel.app/report
+            //     fetch('https://api-sher110106s-projects.vercel.app/report', {
+            //         method: 'POST',
+            //         headers: {
+            //             'Content-Type': 'application/json'
+            //         },
+            //         body: JSON.stringify(reportData)
+            //     })
+            //     .then(response => response.json())
+            //     .then(data => console.log('Report sent successfully:', data))
+            //     .catch(error => console.error('Error sending report:', error));
+            // };
+            //
+            // const captureScreenshot = async () => {
+            //     return 'screenshot-data';
+            // };
             const sendReport = async () => {
-                const screenshot = await captureScreenshot();
-                const reportData = {
-                    actions: userActions,
-                    errors: errorLogs,
-                    screenshot
-                };
+                try {
+                    const screenshot = await captureScreenshot();
+                    const reportData = {
+                        actions: userActions,
+                        errors: errorLogs,
+                        screenshot
+                    };
 
-                fetch('https://api-sher110106s-projects.vercel.app/report', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(reportData)
-                })
-                    .then(response => response.json())
-                    .then(data => console.log('Report sent successfully:', data))
-                    .catch(error => console.error('Error sending report:', error));
+                    const response = await fetch('https://api-sher110106s-projects.vercel.app/report', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(reportData)
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+
+                    const contentType = response.headers.get('content-type');
+                    if (contentType && contentType.includes('application/json')) {
+                        const data = await response.json();
+                        console.log('Report sent successfully:', data);
+                    } else {
+                        const text = await response.text();
+                        console.error('Unexpected response format:', text);
+                    }
+                } catch (error) {
+                    console.error('Error sending report:', error.message);
+                }
             };
 
             const captureScreenshot = async () => {
-                return 'screenshot-data';
+                return 'screenshot-data'; // Placeholder for actual screenshot data
             };
+
 
             const reportButton = document.getElementById('report-button');
             if (reportButton) {
@@ -90,7 +129,6 @@ function App() {
                 </div>
             </nav>
 
-
             {/* Main Content */}
             <main className="flex">
                 {/* Links */}
@@ -99,9 +137,9 @@ function App() {
                         Report
                     </Button>
                 </div>
+
                 <aside className="flex fixed flex-col gap-5 h-[70vh] justify-center ml-10" id="socials">
-                    <a id="instagram" href="https://www.instagram.com/bugzerrr?utm_source=qr" target="_blank"
-                       rel="noopener noreferrer">
+                    <a id="instagram" href="https://www.instagram.com/bugzerrr?utm_source=qr" target="_blank" rel="noopener noreferrer">
                         <IconButton className="rounded hover:shadow-lg" variant="outlined" size="lg">
                             <FontAwesomeIcon icon={faInstagram} className="text-2xl"/>
                         </IconButton>
@@ -125,13 +163,13 @@ function App() {
                         <p className="mt-2 mb-3 text-xl">Welcome to</p>
                         <span className="text-blue-700"><h1 className="my-2 text-8xl font-bold">Bugzer</h1></span>
                         <h2 className="my-2 text-7xl font-semibold">Streamline Your Bug Reporting</h2>
+
+
                     </div>
                     <div className=" flex flex-col items-center mt-20 text-blue-700 justify-center" id="intro">
                         <p className="mt-4 mb-3 text-xl w-3/5 justify-center items-center">
-                            "Bugzer is a web app designed to streamline the bug reporting process for both new and
-                            existing websites.
-                            It provides integrated bug reporting, user action logs, screenshots, and detailed reports to
-                            help developers
+                            "Bugzer is a web app designed to streamline the bug reporting process for both new and existing websites.
+                            It provides integrated bug reporting, user action logs, screenshots, and detailed reports to help developers
                             quickly identify and fix issues."
                         </p>
                     </div>
@@ -149,7 +187,7 @@ function App() {
                             <h2 className="text-2xl mb-4 font-semibold">Watch How It Works</h2>
                             <div className="video-container">
                                 <video controls>
-                                    <source src="./bugzer5.mp4" type="video/mp4"/>
+                                    <source src="./bugzer5.mp4" type="video/mp4" />
                                     Your browser does not support the video tag.
                                 </video>
                             </div>
@@ -161,31 +199,26 @@ function App() {
                         <h1 className="text-3xl mt-40 font-bold p-10">02. About Bugzer</h1>
 
                         <div className="col-span-1  items-center  justify-center">
-                            <img src="./Untitled-3.png" alt="Bugzer logo"
-                                 className="rounded-full items-center  justify-center shadow-lg p-15  h-35 w-96"/>
+                            <img src="./Untitled-3.png" alt="Bugzer logo" className="rounded-full items-center  justify-center shadow-lg p-15  h-35 w-96" />
                         </div>
                         <div className="flex justify-center items-center h-screen">
                             <div className="col-span-2 shadow-lg rounded-lg bg-white p-5">
                                 <p className="mb-3 text-center">
-                                    <b>Welcome to Bugzer!</b> Bugzer is a comprehensive bug reporting tool designed to
-                                    make the process of identifying and fixing bugs as seamless as possible.
-                                    Whether you're a developer, tester, or project manager, Bugzer provides the tools
-                                    you need to streamline your workflow and improve the quality of your software.
+                                    <b>Welcome to Bugzer!</b> Bugzer is a comprehensive bug reporting tool designed to make the process of identifying and fixing bugs as seamless as possible.
+                                    Whether you're a developer, tester, or project manager, Bugzer provides the tools you need to streamline your workflow and improve the quality of your software.
                                 </p>
                                 <p className="my-3 text-center">
-                                    <b>Our Mission</b> is to provide a user-friendly platform that simplifies bug
-                                    reporting and enhances collaboration between team members.
-                                    With Bugzer, you can easily log user actions, capture screenshots, and generate
-                                    detailed reports that help developers quickly identify and resolve issues.
+                                    <b>Our Mission</b> is to provide a user-friendly platform that simplifies bug reporting and enhances collaboration between team members.
+                                    With Bugzer, you can easily log user actions, capture screenshots, and generate detailed reports that help developers quickly identify and resolve issues.
                                 </p>
                                 <p className="my-3 text-center">
-                                    We are constantly evolving and adding new features to ensure that Bugzer meets the
-                                    needs of our users. Stay tuned for updates and new releases!
+                                    We are constantly evolving and adding new features to ensure that Bugzer meets the needs of our users. Stay tuned for updates and new releases!
                                 </p>
                             </div>
                         </div>
 
                     </div>
+
 
 
                     {/* How It Works */}
@@ -196,8 +229,7 @@ function App() {
                         <h1 className="text-3xl font-bold">03. Get In Touch</h1>
                         <h2 className="text-6xl my-4 font-semibold">Contact Us</h2>
                         <p className="text-xl text-center mb-8">
-                            We are always here to help. Whether you have a question, feedback, or need support, feel
-                            free to reach out to us.
+                            We are always here to help. Whether you have a question, feedback, or need support, feel free to reach out to us.
                             Our team is dedicated to providing you with the best possible experience.
                         </p>
                         <a href="mailto:bugzerrr@gmail.com">
