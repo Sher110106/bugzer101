@@ -66,7 +66,7 @@ function App() {
                         screenshot
                     };
 
-                    const response = await fetch('https://api-sher110106s-projects.vercel.app/report', {
+                    const response = await fetch('https://bugzer101api.vercel.app/report', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'

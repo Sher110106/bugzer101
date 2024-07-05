@@ -25,7 +25,7 @@ const Report = mongoose.model('Report', reportSchema);
 const app = express();
 app.use(bodyParser.json());
 app.use(cors({
-    origin: 'https://bugzer.vercel.app' // Allow requests from your frontend domain
+    origin: 'https://bugzerrr.vercel.app' // Allow requests from your frontend domain
 }));
 
 app.get("/", (req, res) => {
