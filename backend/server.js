@@ -1,8 +1,9 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import puppeteer from 'puppeteer';
+import puppeteer from 'puppeteer-core';
 import mongoose from 'mongoose';
 import cors from 'cors';
+import {join} from 'path';
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI)
@@ -25,7 +26,7 @@ const Report = mongoose.model('Report', reportSchema);
 const app = express();
 app.use(bodyParser.json());
 app.use(cors({
-    origin: 'https://bugzerrr.vercel.app' // Allow requests from your frontend domain
+    origin: 'https://bugzer.vercel.app' // Allow requests from your frontend domain
 }));
 
 app.get("/", (req, res) => {
@@ -37,11 +38,10 @@ app.post('/report', async (req, res) => {
 
     let screenshot;
     try {
-        console.log('Launching Puppeteer...');
         const browser = await puppeteer.launch({
-            executablePath: '/Users/sher/Library/CloudStorage/OneDrive-PlakshaUniversity/untitled3/backend/.cache/puppeteer/chrome/mac_arm-126.0.6478.126/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing',
-            args: ['--no-sandbox'],
-            headless: false
+            executablePath: join(__dirname, 'cache', 'puppeteer', 'chrome', 'mac_arm-126.0.6478.126', 'chrome-mac-arm64', 'Google Chrome for Testing.app', 'Contents', 'MacOS', 'Google Chrome for Testing'),
+            args: ['--no-sandbox', '--disable-setuid-sandbox'],
+            headless: true
         });
         const page = await browser.newPage();
 
@@ -55,17 +55,13 @@ app.post('/report', async (req, res) => {
             console.log('Response:', response.url(), response.status());
         });
 
-        console.log('Navigating to page...');
         await page.goto('https://bugzer.vercel.app/', { waitUntil: 'networkidle2' });
 
         // Wait for a specific element to ensure the page is fully loaded
-        console.log('Waiting for selector...');
         await page.waitForSelector('body');
 
-        console.log('Capturing screenshot...');
         screenshot = await page.screenshot({ encoding: 'base64' });
         await browser.close();
-        console.log('Screenshot captured successfully.');
     } catch (err) {
         console.error('Error capturing screenshot:', err.message);
         screenshot = 'screenshot-error'; // Fallback value
