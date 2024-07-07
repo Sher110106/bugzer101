@@ -13,12 +13,12 @@
     }
   ],
   "env": {
-    "PUPPETEER_CACHE_DIR": "/absolute/path/to/your/project/backend/cachePuppet",
-    "MONGODB_URI": "your_mongodb_uri"
+    "PUPPETEER_CACHE_DIR": "/Users/sher/Library/CloudStorage/OneDrive-PlakshaUniversity/untitled3/backend/cachePuppet",
+    "MONGODB_URI": "mongodb+srv://admin:tesbiq-xEskuf-7dygco@cluster0.a6eeksn.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
   },
   "build": {
     "env": {
-      "PUPPETEER_CACHE_DIR": "/absolute/path/to/your/project/backend/cachePuppet"
+      "PUPPETEER_CACHE_DIR": "/Users/sher/Library/CloudStorage/OneDrive-PlakshaUniversity/untitled3/backend/cachePuppet"
     }
   }
 }
